@@ -1,0 +1,29 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsc && nodemon --watch src --ext ts --exec ts-node --ignore '*.test.ts' --delay 3 src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.19.0",
+    "class-validator": "^0.12.2",
+    "graphql": "^15.4.0",
+    "reflect-metadata": "^0.1.13",
+    "source-map-loader": "^1.1.2",
+    "ts-loader": "^8.0.11",
+    "type-graphql": "^1.1.1",
+    "typescript": "^4.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6",
+    "sucrase": "^3.16.0",
+    "ts-node": "^9.0.0",
+    "tslint": "^6.1.3"
+  }
+}
