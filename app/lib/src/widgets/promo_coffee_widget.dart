@@ -1,15 +1,10 @@
-import 'package:coffee_app/src/controllers/promotion_controller.dart';
 import 'package:coffee_app/src/models/promotion_model.dart';
 import 'package:flutter/material.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 
 class PromoCoffeeWidget extends StatelessWidget {
-  final PromotionController controller = PromotionController();
+  final List<PromotionModel> promotions;
 
-  final List<String> mockImages = <String>[
-    "https://images.hdqwalls.com/wallpapers/need-more-coffee-programmer-story.jpg",
-    "https://cdn.hipwallpaper.com/i/60/50/1Pi7Gl.png",
-  ];
+  PromoCoffeeWidget(this.promotions);
 
   @override
   Widget build(BuildContext context) {
@@ -29,74 +24,55 @@ class PromoCoffeeWidget extends StatelessWidget {
         ),
         Container(
           height: 100.0,
-          child: Query(
-            options: QueryOptions(
-              documentNode: gql(controller.getAll),
-            ),
-            builder: (result, {fetchMore, refetch}) {
-              if (result.hasException) {
-                return Text(result.exception.toString());
-              }
-
-              if (result.loading) {
-                return CircularProgressIndicator();
-              }
-
-              final List<PromotionModel> _promotions =
-                  List.from(result.data["promotions"])
-                      .map((p) => PromotionModel.fromJson(p))
-                      .toList();
-
-              return ListView.separated(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                separatorBuilder: (context, index) {
-                  return SizedBox(width: 10.0);
-                },
-                scrollDirection: Axis.horizontal,
-                itemCount: _promotions.length,
-                itemBuilder: (BuildContext _, int index) {
-                  return GestureDetector(
-                    onTap: () async {
-                      await showModalBottomSheet(
-                        context: context,
-                        backgroundColor: Colors.transparent,
-                        builder: (BuildContext _) {
-                          return AboutPromoModal(promotion: _promotions[index]);
-                        },
-                      );
+          child: ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            separatorBuilder: (context, index) {
+              return SizedBox(width: 10.0);
+            },
+            scrollDirection: Axis.horizontal,
+            itemCount: promotions.length,
+            itemBuilder: (BuildContext _, int index) {
+              final PromotionModel promotion = promotions[index];
+              return GestureDetector(
+                onTap: () async {
+                  await showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: (BuildContext _) {
+                      return AboutPromoModal(promotion: promotion);
                     },
-                    child: Card(
-                      child: Container(
-                        width: 200.0,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              Text(
-                                _promotions[index].title,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                              mockImages.first,
+                  );
+                },
+                child: Card(
+                  child: Container(
+                    width: 200.0,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Text(
+                            promotion.title,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
                             ),
                           ),
+                        ],
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                          promotion.imagePath,
                         ),
                       ),
                     ),
-                  );
-                },
+                  ),
+                ),
               );
             },
           ),
@@ -128,7 +104,7 @@ class AboutPromoModal extends StatelessWidget {
               SizedBox(height: 30.0),
               CircleAvatar(
                 radius: 60.0,
-                backgroundImage: NetworkImage(""),
+                backgroundImage: NetworkImage(promotion.imagePath),
               ),
               SizedBox(height: 30.0),
               Text(

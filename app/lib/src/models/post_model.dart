@@ -11,4 +11,10 @@ class PostModel {
         title = json['title'],
         text = json['text'],
         imagePath = json['imagePath'];
+
+  static List<PostModel> fromListJson(List<Map<String, dynamic>> listJson) {
+    return listJson.map((Map<String, dynamic> json) {
+      return PostModel.fromJson(json);
+    });
+  }
 }

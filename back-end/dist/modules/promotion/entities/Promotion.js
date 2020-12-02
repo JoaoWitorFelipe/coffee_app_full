@@ -16,6 +16,7 @@ let Promotion = class Promotion {
     constructor(promotionProp) {
         this.title = promotionProp.title;
         this.description = promotionProp.description;
+        this.imagePath = promotionProp.imagePath;
         this.startDate = promotionProp.startDate;
         this.endDate = promotionProp.endDate;
     }
@@ -28,6 +29,10 @@ __decorate([
     type_graphql_1.Field(),
     __metadata("design:type", String)
 ], Promotion.prototype, "description", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], Promotion.prototype, "imagePath", void 0);
 __decorate([
     type_graphql_1.Field(),
     __metadata("design:type", Number)

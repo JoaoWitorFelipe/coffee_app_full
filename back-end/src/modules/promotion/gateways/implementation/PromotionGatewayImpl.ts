@@ -7,12 +7,14 @@ export default class PromotionGatewayImpl implements PromotionGateway {
             {
                 title: "I need more ☕",
                 description: "Enjoy !!",
+                imagePath: "https://images.hdqwalls.com/wallpapers/need-more-coffee-programmer-story.jpg",
                 startDate: Date.now(),
                 endDate: Date.now(),
             },
             {
                 title: "I need more ☕",
                 description: "Enjoy !!",
+                imagePath: "https://images.hdqwalls.com/wallpapers/need-more-coffee-programmer-story.jpg",
                 startDate: Date.now(),
                 endDate: Date.now(),
             }
