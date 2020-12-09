@@ -4,11 +4,11 @@ import { Field, ObjectType } from "type-graphql";
 
 
 type PromotionProp = {
-    title: String;
-    description: String;
-    imagePath: String;
-    startDate: Number;
-    endDate: Number;
+    title: string;
+    description: string;
+    imagePath: string;
+    startDate: number;
+    endDate: number;
 }
 
 @ObjectType()
@@ -23,19 +23,19 @@ export default class Promotion {
     }
 
     @Field()
-    title: String;
+    title: string;
 
     @Field()
-    description: String;
+    description: string;
 
     @Field()
-    imagePath: String;
+    imagePath: string;
 
     @Field()
-    startDate: Number;
+    startDate: number;
 
     @Field()
-    endDate: Number;
+    endDate: number;
 
 
 }

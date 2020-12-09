@@ -2,10 +2,10 @@ import 'reflect-metadata'
 import  { Field, ObjectType } from 'type-graphql'
 
  type PostProps = {
-  id: Number;
-  title: String;
-  text: String;
-  imagePath: String;
+  id: number;
+  title: string;
+  text: string;
+  imagePath: string;
 }
 
 @ObjectType()
@@ -18,14 +18,14 @@ export default class Post {
     }
     
     @Field()
-    id: Number;
+    id: number;
     
     @Field()
-    title: String;
+    title: string;
 
     @Field()
-    text: String;
+    text: string;
 
     @Field()
-    imagePath: String;
+    imagePath: string;
 }
